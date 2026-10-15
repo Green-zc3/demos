@@ -1,0 +1,79 @@
+Car bob;
+Car [] highway;
+
+void setup(){
+  size(400,400);
+  bob = new Car();
+  highway = new Car [100];
+  for(int i = 0; i < highway.length; i++)
+   // highway [i] = new Car();
+    highway [i] = new Car(color(i*2), 0, i*2, i/20.0);
+  
+
+
+  
+
+
+
+}
+
+void draw(){
+  background(255);
+ for (int i = 0; i < 100; i++){
+   highway [i].move();
+   highway [i].show(); 
+}
+  bob.move();
+  bob.show();
+}
+
+class Car{
+  color myC;
+  float myX, myY, myXspeed;
+  
+  Car(){
+    myC = color(255);
+    myX = width/2;
+    myY = height/2;
+    myXspeed = 1;
+  }
+    //overloaded constructor
+  Car(color c, float x, float y, float s){
+   myC = c;
+   myX = x;
+   myY = y;
+   myXspeed = s;
+  }
+Car(int x, int y){ //overloaded constructor, with differnt NUMBER of argument
+    myC = color(255,0,0);
+    myX = x;
+    myY = y;
+    myXspeed = 1.5;
+  }
+  Car(int y, float spd){ // overloaded constructor, with differnt TYPES of arguments
+    myC = color(0,0,255);
+    myX = 0;
+    myY = y;
+    myXspeed = spd;
+  }
+  Car(float spd, int x){ //overloaded constructor, with different ORDER of argument
+    myC = color(0,255,0);
+    myX = x;
+    myY = 350;
+    myXspeed = spd;
+  }
+
+
+  void show(){
+   rectMode(CENTER);
+   fill(myC);
+   rect(myX, myY, 20, 10);
+  }
+  
+  void move(){
+   myX += myXspeed;
+   if(myX > width)
+     myX = 0;
+  }
+}//end Car class
+
