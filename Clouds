@@ -1,1 +1,62 @@
+class Cloud{
+  int myColor, myOpacity, myWidth;
+  int myX, myY, myHeight, mySpeed;
+  Cloud(){//constructor!
+    myX = (int)(Math.random()*1100)-150;
+    myY = (int)(Math.random()*200);
+    myWidth = (int)(Math.random()*80)+80;
+    myHeight = (int)(Math.random()*40)+20;
+    myColor = (int)(Math.random()*20)+236;
+    myOpacity = (int)(Math.random()*60) + 60;
+    mySpeed = (int)(Math.random()*2)+1;
+}
+  void drift(){
+    myX = myX +mySpeed;
+    if (myX > 900){
+     myX = -150;
+    }
+  }
+  void show(){
+    fill(myColor, myOpacity);
+    ellipse(myX, myY, myWidth, myHeight);
+  }
+}//end of Cloud class
 
+
+class StormCloud extends Cloud{
+  StormCloud(){
+    myX = (int)(Math.random()*100)+300;
+    myY = (int)(Math.random()*30)+50;
+    myWidth = (int)(Math.random()*80)+160;
+    myHeight = (int)(Math.random()*40)+40;
+    myColor = (int)(Math.random()*20)+80;
+    myOpacity = (int)(Math.random()*60) + 100;
+    mySpeed = 1;
+  }
+}
+
+
+
+Cloud [] billys = new Cloud[100];
+StormCloud kevin = new StormCloud();
+void setup(){
+ size(800,600);
+ noStroke();
+ for(int i = 0; i < 10; i++){
+  billys[i] = new StormCloud();
+ }
+ for(int i = 10; i < billys.length; i++){
+   billys[i] = new Cloud();
+ }
+}
+void draw(){
+  background(135, 206, 235);
+  fill(49, 99, 0);
+  rect(0, 400, 800, 200);
+  for(int i = 0; i < billys.length; i++){
+    billys[i].drift();
+    billys[i].show();
+  }
+  //kevin.drift();
+  //kevin.show();
+}
